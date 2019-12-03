@@ -7,6 +7,9 @@
     {
         public int Id { get; set; }
 
+        [MaxLength(50, ErrorMessage = "El campo {0} puede contener un máximo de {1} caracteres")]
+        [Required]
+
         public string Name { get; set; }
         
         public string Address { get; set; }
@@ -21,7 +24,7 @@
         // public DateTime LastPurchase { get; set; }
 
         [Display(Name = "Birth Date")]
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         // [Display(Name = "Is Availabe?")]
         // public bool IsAvailabe { get; set; }
