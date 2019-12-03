@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinica.Common", "Clinica.Common\Clinica.Common.csproj", "{B6F46194-CFEA-4C19-8A20-6DAD11517B39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clinica.Common", "Clinica.Common\Clinica.Common.csproj", "{B6F46194-CFEA-4C19-8A20-6DAD11517B39}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{EBAB0361-B100-42EE-9A66-AA32076BAC79}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{7AB8D6A7-9DCE-452F-8C5C-F6E53F27B7E2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinica.Web", "Clinica.Web\Clinica.Web.csproj", "{1ADA5039-FF1E-4ED7-AD07-0DD14524F948}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forms", "Forms", "{88DD7374-03A7-439D-8E2B-AFA366A4A949}"
 EndProject
@@ -19,13 +17,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinica.UIForms.Android", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinica.UIForms.iOS", "Clinica.UIForms\Clinica.UIForms.iOS\Clinica.UIForms.iOS.csproj", "{CAE1FC4A-124C-4906-9FB0-B79EC34A6398}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinica.UIForms", "Clinica.UIForms\Clinica.UIForms\Clinica.UIForms.csproj", "{EE902642-0122-4C9B-B751-442776A2E463}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clinica.UIForms", "Clinica.UIForms\Clinica.UIForms\Clinica.UIForms.csproj", "{EE902642-0122-4C9B-B751-442776A2E463}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinica.UIClassic", "Clinica.UIClassic\Clinica.UIClassic.csproj", "{58AF018C-D268-433A-A2EF-AD64E01587BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clinica.UIClassic", "Clinica.UIClassic\Clinica.UIClassic.csproj", "{58AF018C-D268-433A-A2EF-AD64E01587BD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinica.UIClassic.Android", "Clinica.UIClassic.Android\Clinica.UIClassic.Android.csproj", "{549D59AB-4D6C-482C-BD03-676B97D38A9E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinica.UIClassic.iOS", "Clinica.UIClassic.iOS\Clinica.UIClassic.iOS.csproj", "{966B1F2D-B404-461B-80F1-F5372CE84FB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinica.Web", "Clinica.Web\Clinica.Web.csproj", "{82632287-B79D-40E8-A7FA-9388756CFBBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,18 +49,6 @@ Global
 		{B6F46194-CFEA-4C19-8A20-6DAD11517B39}.Release|iPhone.Build.0 = Release|Any CPU
 		{B6F46194-CFEA-4C19-8A20-6DAD11517B39}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{B6F46194-CFEA-4C19-8A20-6DAD11517B39}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{1ADA5039-FF1E-4ED7-AD07-0DD14524F948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1ADA5039-FF1E-4ED7-AD07-0DD14524F948}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1ADA5039-FF1E-4ED7-AD07-0DD14524F948}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{1ADA5039-FF1E-4ED7-AD07-0DD14524F948}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{1ADA5039-FF1E-4ED7-AD07-0DD14524F948}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{1ADA5039-FF1E-4ED7-AD07-0DD14524F948}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{1ADA5039-FF1E-4ED7-AD07-0DD14524F948}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1ADA5039-FF1E-4ED7-AD07-0DD14524F948}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1ADA5039-FF1E-4ED7-AD07-0DD14524F948}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{1ADA5039-FF1E-4ED7-AD07-0DD14524F948}.Release|iPhone.Build.0 = Release|Any CPU
-		{1ADA5039-FF1E-4ED7-AD07-0DD14524F948}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{1ADA5039-FF1E-4ED7-AD07-0DD14524F948}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{8AE55CE6-02B2-42D3-83D7-F293FEFFC258}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8AE55CE6-02B2-42D3-83D7-F293FEFFC258}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AE55CE6-02B2-42D3-83D7-F293FEFFC258}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
@@ -141,12 +129,23 @@ Global
 		{966B1F2D-B404-461B-80F1-F5372CE84FB9}.Release|iPhone.Build.0 = Release|iPhone
 		{966B1F2D-B404-461B-80F1-F5372CE84FB9}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{966B1F2D-B404-461B-80F1-F5372CE84FB9}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{82632287-B79D-40E8-A7FA-9388756CFBBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82632287-B79D-40E8-A7FA-9388756CFBBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82632287-B79D-40E8-A7FA-9388756CFBBE}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{82632287-B79D-40E8-A7FA-9388756CFBBE}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{82632287-B79D-40E8-A7FA-9388756CFBBE}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{82632287-B79D-40E8-A7FA-9388756CFBBE}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{82632287-B79D-40E8-A7FA-9388756CFBBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82632287-B79D-40E8-A7FA-9388756CFBBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82632287-B79D-40E8-A7FA-9388756CFBBE}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{82632287-B79D-40E8-A7FA-9388756CFBBE}.Release|iPhone.Build.0 = Release|Any CPU
+		{82632287-B79D-40E8-A7FA-9388756CFBBE}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{82632287-B79D-40E8-A7FA-9388756CFBBE}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{1ADA5039-FF1E-4ED7-AD07-0DD14524F948} = {EBAB0361-B100-42EE-9A66-AA32076BAC79}
 		{88DD7374-03A7-439D-8E2B-AFA366A4A949} = {7AB8D6A7-9DCE-452F-8C5C-F6E53F27B7E2}
 		{9DDF1EB6-7B95-4CF5-B13B-ACC47D0F09A8} = {7AB8D6A7-9DCE-452F-8C5C-F6E53F27B7E2}
 		{8AE55CE6-02B2-42D3-83D7-F293FEFFC258} = {88DD7374-03A7-439D-8E2B-AFA366A4A949}
@@ -155,6 +154,7 @@ Global
 		{58AF018C-D268-433A-A2EF-AD64E01587BD} = {9DDF1EB6-7B95-4CF5-B13B-ACC47D0F09A8}
 		{549D59AB-4D6C-482C-BD03-676B97D38A9E} = {9DDF1EB6-7B95-4CF5-B13B-ACC47D0F09A8}
 		{966B1F2D-B404-461B-80F1-F5372CE84FB9} = {9DDF1EB6-7B95-4CF5-B13B-ACC47D0F09A8}
+		{82632287-B79D-40E8-A7FA-9388756CFBBE} = {EBAB0361-B100-42EE-9A66-AA32076BAC79}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {694C4B9B-9F57-4BAB-9CF6-CA5AD369364C}
