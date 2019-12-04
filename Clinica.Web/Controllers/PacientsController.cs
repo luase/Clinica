@@ -1,104 +1,102 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Clinica.Web.Data;
-using Clinica.Web.Data.Entities;
-
-namespace Clinica.Web.Controllers
+﻿namespace Clinica.Web.Controllers
 {
+    using System.Threading.Tasks;
+    using Data;
+    using Data.Entities;
+    using Helpers;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+
     public class PacientsController : Controller
     {
-        private readonly IRepository repository;
+        private readonly IPacientRepository pacientRepository;
 
-        public PacientsController(IRepository repository)
+        private readonly IUserHelper userHelper;
+
+        public PacientsController(IPacientRepository pacientRepository, IUserHelper userHelper)
         {
-            this.repository = repository;
+            this.pacientRepository = pacientRepository;
+            this.userHelper = userHelper;
         }
 
-        // GET: Pacients
+        // GET: Products
         public IActionResult Index()
         {
-            return View(this.repository.GetPacients());
+            return View(this.pacientRepository.GetAll());
         }
 
-        // GET: Pacients/Details/5
-        public IActionResult Details(int? id)
+        // GET: Products/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var pacients = this.repository.GetPacient(id.Value);
-            if (pacients == null)
+            var product = await this.pacientRepository.GetByIdAsync(id.Value);
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(pacients);
+            return View(product);
         }
 
-        // GET: Pacients/Create
+        // GET: Products/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Pacients/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Products/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Pacients pacients)
+        public async Task<IActionResult> Create(Pacients product)
         {
             if (ModelState.IsValid)
             {
-                this.repository.AddPacient(pacients);
-                await this.repository.SaveAllAsync();
+                // TODO: Pending to change to: this.User.Identity.Name
+                product.User = await this.userHelper.GetUserByEmailAsync("jzuluaga55@gmail.com");
+                await this.pacientRepository.CreateAsync(product);
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(pacients);
+            return View(product);
         }
 
-        // GET: Pacients/Edit/5
-        public IActionResult Edit(int? id)
+        // GET: Products/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var pacients = this.repository.GetPacient(id.Value);
-            if (pacients == null)
+            var product = await this.pacientRepository.GetByIdAsync(id.Value);
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(pacients);
+            return View(product);
         }
 
-        // POST: Pacients/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Products/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Pacients pacients)
+        public async Task<IActionResult> Edit(Pacients product)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    this.repository.UpdatePacient(pacients);
-                    await this.repository.SaveAllAsync();
+                    // TODO: Pending to change to: this.User.Identity.Name
+                    product.User = await this.userHelper.GetUserByEmailAsync("jzuluaga55@gmail.com");
+                    await this.pacientRepository.UpdateAsync(product);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!this.repository.PacientExists(pacients.Id))
+                    if (!await this.pacientRepository.ExistAsync(product.Id))
                     {
                         return NotFound();
                     }
@@ -109,35 +107,37 @@ namespace Clinica.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(pacients);
+
+            return View(product);
         }
 
-        // GET: Pacients/Delete/5
-        public IActionResult Delete(int? id)
+        // GET: Products/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var pacients = this.repository.GetPacient(id.Value);
-            if (pacients == null)
+            var product = await this.pacientRepository.GetByIdAsync(id.Value);
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(pacients);
+            return View(product);
         }
 
-        // POST: Pacients/Delete/5
+        // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var pacients = this.repository.GetPacient(id);
-            this.repository.RemovePacient(pacients);
-            await this.repository.SaveAllAsync();
+            var product = await this.pacientRepository.GetByIdAsync(id);
+            await this.pacientRepository.DeleteAsync(product);
             return RedirectToAction(nameof(Index));
         }
     }
+
+
 }

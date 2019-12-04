@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class Pacients
+    public class Pacients : IEntity
     {
         public int Id { get; set; }
 
@@ -26,11 +26,14 @@
         [Display(Name = "Birth Date")]
         public DateTime? BirthDate { get; set; }
 
+
         // [Display(Name = "Is Availabe?")]
         // public bool IsAvailabe { get; set; }
 
         // [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = false)]
         // public double Stock { get; set; }
+
+        public User User { get; set; }
     }
 
 }
