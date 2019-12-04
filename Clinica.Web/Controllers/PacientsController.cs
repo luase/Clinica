@@ -63,17 +63,21 @@
 
                 if (view.PictureFile != null && view.PictureFile.Length > 0)
                 {
+                    var guid = Guid.NewGuid().ToString();
+                    var file = $"{guid}.jpg";
+
+
                     path = Path.Combine(
                         Directory.GetCurrentDirectory(), 
                         "wwwroot\\images\\Pacients", 
-                        view.PictureFile.FileName);
+                        file);
 
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await view.PictureFile.CopyToAsync(stream);
                     }
 
-                    path = $"~/images/Pacients/{view.PictureFile.FileName}";
+                    path = $"~/images/Pacients/{file}";
                 }
 
                 var pacient = this.ToPacient(view, path);
@@ -140,21 +144,25 @@
             {
                 try
                 {
-                    var path = view.PictureUrl;
+                    var path = string.Empty;
 
                     if (view.PictureFile != null && view.PictureFile.Length > 0)
                     {
+                        var guid = Guid.NewGuid().ToString();
+                        var file = $"{guid}.jpg";
+
+
                         path = Path.Combine(
                             Directory.GetCurrentDirectory(),
                             "wwwroot\\images\\Pacients",
-                            view.PictureFile.FileName);
+                            file);
 
                         using (var stream = new FileStream(path, FileMode.Create))
                         {
                             await view.PictureFile.CopyToAsync(stream);
                         }
 
-                        path = $"~/images/Pacients/{view.PictureFile.FileName}";
+                        path = $"~/images/Pacients/{file}";
                     }
 
                     var pacient = this.ToPacient(view, path);
