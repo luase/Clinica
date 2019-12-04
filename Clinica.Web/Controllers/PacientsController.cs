@@ -1,6 +1,9 @@
 ﻿namespace Clinica.Web.Controllers
 {
+    using System;
+    using System.IO;
     using System.Threading.Tasks;
+    using Clinica.Web.Models;
     using Data;
     using Data.Entities;
     using Helpers;
@@ -33,13 +36,13 @@
                 return NotFound();
             }
 
-            var product = await this.pacientRepository.GetByIdAsync(id.Value);
-            if (product == null)
+            var pacient = await this.pacientRepository.GetByIdAsync(id.Value);
+            if (pacient == null)
             {
                 return NotFound();
             }
 
-            return View(product);
+            return View(pacient);
         }
 
         // GET: Pacients/Create
@@ -51,17 +54,48 @@
         // POST: Pacients/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Pacients product)
+        public async Task<IActionResult> Create(PacientViewModel view)
         {
             if (ModelState.IsValid)
             {
+                var path = string.Empty;
+
+                if (view.PictureFile != null && view.PictureFile.Length > 0)
+                {
+                    path = Path.Combine(
+                        Directory.GetCurrentDirectory(), 
+                        "wwwroot\\images\\Pacients", 
+                        view.PictureFile.FileName);
+
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await view.PictureFile.CopyToAsync(stream);
+                    }
+
+                    path = $"~/images/Pacients/{view.PictureFile.FileName}";
+                }
+
+                var pacient = this.ToPacient(view, path);
                 // TODO: Pending to change to: this.User.Identity.Name
-                product.User = await this.userHelper.GetUserByEmailAsync("jzuluaga55@gmail.com");
-                await this.pacientRepository.CreateAsync(product);
+                pacient.User = await this.userHelper.GetUserByEmailAsync("jzuluaga55@gmail.com");
+                await this.pacientRepository.CreateAsync(pacient);
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(product);
+            return View(view);
+        }
+
+        private Pacients ToPacient(PacientViewModel view, string path)
+        {
+            return new Pacients
+            {
+                Id = view.Id,
+                Name = view.Name,
+                Address = view.Address,
+                BirthDate = view.BirthDate,
+                PictureUrl = path,
+                User = view.User
+            };
         }
 
         // GET: Pacients/Edit/5
@@ -72,31 +106,31 @@
                 return NotFound();
             }
 
-            var product = await this.pacientRepository.GetByIdAsync(id.Value);
-            if (product == null)
+            var pacient = await this.pacientRepository.GetByIdAsync(id.Value);
+            if (pacient == null)
             {
                 return NotFound();
             }
 
-            return View(product);
+            return View(pacient);
         }
 
         // POST: Pacients/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Pacients product)
+        public async Task<IActionResult> Edit(Pacients pacient)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
                     // TODO: Pending to change to: this.User.Identity.Name
-                    product.User = await this.userHelper.GetUserByEmailAsync("jzuluaga55@gmail.com");
-                    await this.pacientRepository.UpdateAsync(product);
+                    pacient.User = await this.userHelper.GetUserByEmailAsync("jzuluaga55@gmail.com");
+                    await this.pacientRepository.UpdateAsync(pacient);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!await this.pacientRepository.ExistAsync(product.Id))
+                    if (!await this.pacientRepository.ExistAsync(pacient.Id))
                     {
                         return NotFound();
                     }
@@ -108,7 +142,7 @@
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(product);
+            return View(pacient);
         }
 
         // GET: Pacients/Delete/5
@@ -119,13 +153,13 @@
                 return NotFound();
             }
 
-            var product = await this.pacientRepository.GetByIdAsync(id.Value);
-            if (product == null)
+            var pacient = await this.pacientRepository.GetByIdAsync(id.Value);
+            if (pacient == null)
             {
                 return NotFound();
             }
 
-            return View(product);
+            return View(pacient);
         }
 
         // POST: Pacients/Delete/5
@@ -133,8 +167,8 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var product = await this.pacientRepository.GetByIdAsync(id);
-            await this.pacientRepository.DeleteAsync(product);
+            var pacient = await this.pacientRepository.GetByIdAsync(id);
+            await this.pacientRepository.DeleteAsync(pacient);
             return RedirectToAction(nameof(Index));
         }
     }

@@ -18,7 +18,7 @@
         // public decimal Price { get; set; }
 
         [Display(Name = "Picture")]
-        public string Picture { get; set; }
+        public string PictureUrl { get; set; }
 
         // [Display(Name = "Last Purchase")]
         // public DateTime LastPurchase { get; set; }

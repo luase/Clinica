@@ -19,7 +19,7 @@
                 @Html.DisplayNameFor(model => model.Address)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Picture)
+                @Html.DisplayNameFor(model => model.PictureUrl)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.BirthDate)
@@ -37,7 +37,10 @@
                 @Html.DisplayFor(modelItem => item.Address)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Picture)
+                @if (!string.IsNullOrEmpty(item.PictureUrl))
+	            {
+                <img src="@Url.Content(item.PictureUrl)" alt="Image" style="width:100px;height:150px;max-width: 100%; height: auto;" />
+	            }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BirthDate)
