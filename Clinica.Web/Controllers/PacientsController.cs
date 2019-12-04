@@ -19,13 +19,13 @@
             this.userHelper = userHelper;
         }
 
-        // GET: Products
+        // GET: Pacients
         public IActionResult Index()
         {
             return View(this.pacientRepository.GetAll());
         }
 
-        // GET: Products/Details/5
+        // GET: Pacients/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -42,13 +42,13 @@
             return View(product);
         }
 
-        // GET: Products/Create
+        // GET: Pacients/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Products/Create
+        // POST: Pacients/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Pacients product)
@@ -64,7 +64,7 @@
             return View(product);
         }
 
-        // GET: Products/Edit/5
+        // GET: Pacients/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,7 +81,7 @@
             return View(product);
         }
 
-        // POST: Products/Edit/5
+        // POST: Pacients/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Pacients product)
@@ -111,7 +111,7 @@
             return View(product);
         }
 
-        // GET: Products/Delete/5
+        // GET: Pacients/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -128,7 +128,7 @@
             return View(product);
         }
 
-        // POST: Products/Delete/5
+        // POST: Pacients/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
