@@ -112,25 +112,58 @@
                 return NotFound();
             }
 
-            return View(pacient);
+            var view = this.ToPacientViewModel(pacient);
+            return View(view);
+        }
+
+        private object ToPacientViewModel(Pacients pacient)
+        {
+            return new PacientViewModel
+            {
+                Id = pacient.Id,
+                Name = pacient.Name,
+                Address = pacient.Address,
+                BirthDate = pacient.BirthDate,
+                PictureUrl=pacient.PictureUrl,
+                User = pacient.User
+            };
+            
         }
 
         // POST: Pacients/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Pacients pacient)
+        public async Task<IActionResult> Edit(PacientViewModel view)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
+                    var path = view.PictureUrl;
+
+                    if (view.PictureFile != null && view.PictureFile.Length > 0)
+                    {
+                        path = Path.Combine(
+                            Directory.GetCurrentDirectory(),
+                            "wwwroot\\images\\Pacients",
+                            view.PictureFile.FileName);
+
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+                            await view.PictureFile.CopyToAsync(stream);
+                        }
+
+                        path = $"~/images/Pacients/{view.PictureFile.FileName}";
+                    }
+
+                    var pacient = this.ToPacient(view, path);
                     // TODO: Pending to change to: this.User.Identity.Name
                     pacient.User = await this.userHelper.GetUserByEmailAsync("jzuluaga55@gmail.com");
                     await this.pacientRepository.UpdateAsync(pacient);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!await this.pacientRepository.ExistAsync(pacient.Id))
+                    if (!await this.pacientRepository.ExistAsync(view.Id))
                     {
                         return NotFound();
                     }
@@ -142,7 +175,7 @@
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(pacient);
+            return View(view);
         }
 
         // GET: Pacients/Delete/5
