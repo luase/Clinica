@@ -1,5 +1,6 @@
 ﻿namespace Clinica.UIForms
 {
+    using Clinica.UIForms.ViewModels;
     using Clinica.UIForms.Views;
     using System;
     using Xamarin.Forms;
@@ -10,6 +11,7 @@
         {
             InitializeComponent();
 
+            MainViewModel.GetInstance().Login = new LoginViewModel();
             MainPage = new NavigationPage(new LoginPage());
         }
 

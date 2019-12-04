@@ -1,12 +1,13 @@
 ﻿
 namespace Clinica.UIForms.ViewModels
 {
+    using Clinica.UIForms.Views;
     using GalaSoft.MvvmLight.Command;
     using System;
     using System.Windows.Input;
     using Xamarin.Forms;
 
-    public class LoginViewModel
+    public class LoginViewModel 
     {
         public string Email { get; set; }
 
@@ -52,12 +53,14 @@ namespace Clinica.UIForms.ViewModels
                 return;
             }
 
-            await Application.Current.MainPage.DisplayAlert(
-                "Ok",
-                "Fuck yeah",
-                "Accept"
-                );
-            return;
+            //await Application.Current.MainPage.DisplayAlert(
+            //    "Ok",
+            //    "Fuck yeah",
+            //    "Accept"
+            //    );
+            //return;
+            MainViewModel.GetInstance().Pacients = new PacientsViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new PacientsPage());
         }
     }
 }
