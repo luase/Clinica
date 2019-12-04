@@ -34,6 +34,18 @@
         // public double Stock { get; set; }
 
         public User User { get; set; }
+
+        public string ImageFullPath {
+            get
+            {
+                if (string.IsNullOrEmpty(this.PictureUrl))
+                {
+                    return null;
+                }
+
+                return $"https://clinicaapp.azurewebsites.net{this.PictureUrl.Substring(1)}";
+            } 
+        }
     }
 
 }

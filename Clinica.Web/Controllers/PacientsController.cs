@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+    using System.Linq;
     using System.Threading.Tasks;
     using Clinica.Web.Models;
     using Data;
@@ -25,7 +26,7 @@
         // GET: Pacients
         public IActionResult Index()
         {
-            return View(this.pacientRepository.GetAll());
+            return View(this.pacientRepository.GetAll().OrderBy(p => p.Name));
         }
 
         // GET: Pacients/Details/5

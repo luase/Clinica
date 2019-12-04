@@ -16,7 +16,7 @@
         [HttpGet]
         public IActionResult GetPacients()
         {
-            return this.Ok(this.pacientRepository.GetAll());
+            return this.Ok(this.pacientRepository.GetAllWithUsers());
         }
     }
 
