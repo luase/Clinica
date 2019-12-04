@@ -1,16 +1,16 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-namespace Clinica.UIForms
+﻿namespace Clinica.UIForms
 {
+    using Clinica.UIForms.Views;
+    using System;
+    using Xamarin.Forms;
+    using Xamarin.Forms.Xaml;
     public partial class App : Application
     {
         public App()
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new LoginPage());
         }
 
         protected override void OnStart()

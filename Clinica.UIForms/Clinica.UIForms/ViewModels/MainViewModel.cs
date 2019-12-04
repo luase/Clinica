@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Clinica.UIForms.ViewModels
+﻿namespace Clinica.UIForms.ViewModels
 {
     public class MainViewModel
     {
+        public LoginViewModel Login { get; set; }
+
+        public MainViewModel()
+        {
+            this.Login = new LoginViewModel();
+        }
     }
 }

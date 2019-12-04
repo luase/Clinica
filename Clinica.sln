@@ -25,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinica.UIClassic.Android",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinica.UIClassic.iOS", "Clinica.UIClassic.iOS\Clinica.UIClassic.iOS.csproj", "{966B1F2D-B404-461B-80F1-F5372CE84FB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinica.Web", "Clinica.Web\Clinica.Web.csproj", "{82632287-B79D-40E8-A7FA-9388756CFBBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clinica.Web", "Clinica.Web\Clinica.Web.csproj", "{82632287-B79D-40E8-A7FA-9388756CFBBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
