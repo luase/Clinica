@@ -12,29 +12,28 @@ namespace Clinica.Web.Controllers
 {
     public class PacientsController : Controller
     {
-        private readonly DataContext _context;
+        private readonly IRepository repository;
 
-        public PacientsController(DataContext context)
+        public PacientsController(IRepository repository)
         {
-            _context = context;
+            this.repository = repository;
         }
 
         // GET: Pacients
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Pacients.ToListAsync());
+            return View(this.repository.GetPacients());
         }
 
         // GET: Pacients/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var pacients = await _context.Pacients
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var pacients = this.repository.GetPacient(id.Value);
             if (pacients == null)
             {
                 return NotFound();
@@ -54,30 +53,32 @@ namespace Clinica.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address,Picture,BirthDate")] Pacients pacients)
+        public async Task<IActionResult> Create(Pacients pacients)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(pacients);
-                await _context.SaveChangesAsync();
+                this.repository.AddPacient(pacients);
+                await this.repository.SaveAllAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(pacients);
         }
 
         // GET: Pacients/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var pacients = await _context.Pacients.FindAsync(id);
+            var pacients = this.repository.GetPacient(id.Value);
             if (pacients == null)
             {
                 return NotFound();
             }
+
             return View(pacients);
         }
 
@@ -86,23 +87,18 @@ namespace Clinica.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,Picture,BirthDate")] Pacients pacients)
+        public async Task<IActionResult> Edit(Pacients pacients)
         {
-            if (id != pacients.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(pacients);
-                    await _context.SaveChangesAsync();
+                    this.repository.UpdatePacient(pacients);
+                    await this.repository.SaveAllAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PacientsExists(pacients.Id))
+                    if (!this.repository.PacientExists(pacients.Id))
                     {
                         return NotFound();
                     }
@@ -117,15 +113,14 @@ namespace Clinica.Web.Controllers
         }
 
         // GET: Pacients/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var pacients = await _context.Pacients
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var pacients = this.repository.GetPacient(id.Value);
             if (pacients == null)
             {
                 return NotFound();
@@ -139,15 +134,10 @@ namespace Clinica.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var pacients = await _context.Pacients.FindAsync(id);
-            _context.Pacients.Remove(pacients);
-            await _context.SaveChangesAsync();
+            var pacients = this.repository.GetPacient(id);
+            this.repository.RemovePacient(pacients);
+            await this.repository.SaveAllAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool PacientsExists(int id)
-        {
-            return _context.Pacients.Any(e => e.Id == id);
         }
     }
 }
