@@ -215,6 +215,11 @@
             await this.pacientRepository.DeleteAsync(pacient);
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult ProductNotFound()
+        {
+            return this.View();
+        }
     }
 
 

@@ -40,7 +40,7 @@ namespace Clinica.Web.Controllers
                         return this.Redirect(this.Request.Query["ReturnUrl"].First());
                     }
 
-                    return this.RedirectToAction("Index", "Home");
+                    return this.RedirectToAction("index", "home"); //Con minuscula, si no, no jala
                 }
             }
 
@@ -51,7 +51,7 @@ namespace Clinica.Web.Controllers
         public async Task<IActionResult> Logout()
         {
             await this.userHelper.LogoutAsync();
-            return this.RedirectToAction("index", "home");
+            return this.RedirectToAction("Index", "home");//Si jala así
         }
 
         public IActionResult Register()
@@ -178,6 +178,10 @@ namespace Clinica.Web.Controllers
             }
 
             return this.View(model);
+        }
+        public IActionResult NotAuthorized()
+        {
+            return this.View();
         }
 
     }

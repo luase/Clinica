@@ -8,9 +8,17 @@
     {
         public DbSet<Pacients> Pacients { get; set; }
 
+        public DbSet<Appointment> Appointments { get; set; }
+
+        public DbSet<AppointmentDetail> AppointmentDetails { get; set; }
+
+        public DbSet<AppointmentDetailTemp> AppointmentDetailTemps { get; set; }
+
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }
+
+        //Falta agregar override de un warning video 25 2:47 min
     }
 
 }

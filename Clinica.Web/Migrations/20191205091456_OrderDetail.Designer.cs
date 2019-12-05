@@ -4,101 +4,22 @@ using Clinica.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Clinica.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20191205091456_OrderDetail")]
+    partial class OrderDetail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Clinica.Web.Data.Entities.Appointment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Comments");
-
-                    b.Property<DateTime?>("Date");
-
-                    b.Property<string>("Illness");
-
-                    b.Property<string>("Treatment");
-
-                    b.Property<string>("UserId")
-                        .IsRequired();
-
-                    b.Property<decimal>("Value");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Appointments");
-                });
-
-            modelBuilder.Entity("Clinica.Web.Data.Entities.AppointmentDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("AppointmentId");
-
-                    b.Property<string>("Comments");
-
-                    b.Property<string>("Illness");
-
-                    b.Property<int>("PacientId");
-
-                    b.Property<decimal>("Price");
-
-                    b.Property<string>("Treatment");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppointmentId");
-
-                    b.HasIndex("PacientId");
-
-                    b.ToTable("AppointmentDetails");
-                });
-
-            modelBuilder.Entity("Clinica.Web.Data.Entities.AppointmentDetailTemp", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Comments");
-
-                    b.Property<string>("Illness");
-
-                    b.Property<int>("PacientId");
-
-                    b.Property<decimal>("Price");
-
-                    b.Property<string>("Treatment");
-
-                    b.Property<string>("UserId")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PacientId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AppointmentDetailTemps");
-                });
 
             modelBuilder.Entity("Clinica.Web.Data.Entities.Pacients", b =>
                 {
@@ -288,39 +209,6 @@ namespace Clinica.Web.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("Clinica.Web.Data.Entities.Appointment", b =>
-                {
-                    b.HasOne("Clinica.Web.Data.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Clinica.Web.Data.Entities.AppointmentDetail", b =>
-                {
-                    b.HasOne("Clinica.Web.Data.Entities.Appointment")
-                        .WithMany("Items")
-                        .HasForeignKey("AppointmentId");
-
-                    b.HasOne("Clinica.Web.Data.Entities.Pacients", "Pacient")
-                        .WithMany()
-                        .HasForeignKey("PacientId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Clinica.Web.Data.Entities.AppointmentDetailTemp", b =>
-                {
-                    b.HasOne("Clinica.Web.Data.Entities.Pacients", "Pacient")
-                        .WithMany()
-                        .HasForeignKey("PacientId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Clinica.Web.Data.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Clinica.Web.Data.Entities.Pacients", b =>

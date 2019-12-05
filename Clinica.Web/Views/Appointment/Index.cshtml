@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Clinica.Web.Data.Entities.Appointment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Appointmets</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            @if (this.User.IsInRole("Admin") || this.User.IsInRole("UserPro"))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.User.FullName)
+                </th>
+            }
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                # Lines
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Treatment)
+            </th>
+
+            @if (this.User.IsInRole("Admin") || this.User.IsInRole("Doctor"))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.Illness)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Comments)
+                </th>
+            }
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            @if (this.User.IsInRole("Admin") || this.User.IsInRole("Admin"))
+            {
+                <th>
+                    @Html.DisplayFor(modelItem => item.User.FullName)
+                </th>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Items.Count())
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Treatment)
+            </td>
+            @if (this.User.IsInRole("Admin") || this.User.IsInRole("Doctor"))
+            {
+                <td>
+                    @Html.DisplayFor(model => item.Illness)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Comments)
+                </td>
+            }
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+            </td>
+         </tr>
+        }
+    </tbody>
+</table>
