@@ -83,7 +83,6 @@
                 }
 
                 var pacient = this.ToPacient(view, path);
-                // TODO: Pending to change to: this.User.Identity.Name
                 pacient.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                 await this.pacientRepository.CreateAsync(pacient);
                 return RedirectToAction(nameof(Index));
