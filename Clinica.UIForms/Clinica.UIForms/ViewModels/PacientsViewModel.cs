@@ -34,11 +34,13 @@ namespace Clinica.UIForms.ViewModels
         {
             this.IsRefreshing = true;
 
+            var url = Application.Current.Resources["UrlAPI"].ToString();
             var response = await this.apiService.GetListAsync<Pacients>(
-                "https://webclinica.azurewebsites.net",
+                url,
                 "/api",
-                "/Pacients");
-
+                "/Pacients",
+                "bearer",
+                MainViewModel.GetInstance().Token.Token);
             this.IsRefreshing = false;
 
 
