@@ -12,7 +12,6 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
-    [Authorize]
     public class PacientsController : Controller
     {
         private readonly IPacientRepository pacientRepository;
@@ -25,7 +24,6 @@
             this.userHelper = userHelper;
         }
 
-        // GET: Pacients
         public IActionResult Index()
         {
             return View(this.pacientRepository.GetAll().OrderBy(p => p.Name));
@@ -48,13 +46,13 @@
             return View(pacient);
         }
 
-        // GET: Pacients/Create
+        [Authorize(Roles = "Admin, UserPro, Doctor")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Pacients/Create
+        [Authorize(Roles = "Admin, UserPro, Doctor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(PacientViewModel view)
@@ -105,6 +103,7 @@
         }
 
         // GET: Pacients/Edit/5
+        [Authorize(Roles = "Admin, UserPro, Doctor")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -139,6 +138,7 @@
         // POST: Pacients/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, UserPro, Doctor")]
         public async Task<IActionResult> Edit(PacientViewModel view)
         {
             if (ModelState.IsValid)
@@ -188,6 +188,7 @@
         }
 
         // GET: Pacients/Delete/5
+        [Authorize(Roles = "Admin, UserPro, Doctor")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -205,6 +206,7 @@
         }
 
         // POST: Pacients/Delete/5
+        [Authorize(Roles = "Admin, UserPro, Doctor")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
