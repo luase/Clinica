@@ -10,10 +10,18 @@ namespace Clinica.UIForms.ViewModels
     {
         private ApiService apiService;
         private ObservableCollection<Pacients> pacients;
-        public ObservableCollection<Pacients> Pacients 
-        { 
-            get { return this.pacients; } 
-            set { this.SetValue(ref this.pacients, value); } 
+        private bool isRefreshing;
+
+        public ObservableCollection<Pacients> Pacients
+        {
+            get { return this.pacients; }
+            set { this.SetValue(ref this.pacients, value); }
+        }
+
+        public bool IsRefreshing 
+        {
+            get { return this.isRefreshing; }
+            set { this.SetValue(ref this.isRefreshing, value); }
         }
 
         public PacientsViewModel()
@@ -24,10 +32,15 @@ namespace Clinica.UIForms.ViewModels
 
         private async void LoadPacients()
         {
+            this.IsRefreshing = true;
+
             var response = await this.apiService.GetListAsync<Pacients>(
                 "https://webclinica.azurewebsites.net",
                 "/api",
                 "/Pacients");
+
+            this.IsRefreshing = false;
+
 
             if (!response.IsSuccess)
             {
