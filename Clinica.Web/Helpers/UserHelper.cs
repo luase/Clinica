@@ -86,5 +86,15 @@
         {
             return await this.userManager.IsInRoleAsync(user, roleName);
         }
+
+        public async Task<SignInResult> ValidatePasswordAsync(User user, string password)
+        {
+            return await this.signInManager.CheckPasswordSignInAsync(
+                user,
+                password,
+                false);
+        }
+
+
     }
 }

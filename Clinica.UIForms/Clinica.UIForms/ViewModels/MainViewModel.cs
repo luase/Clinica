@@ -1,8 +1,12 @@
-﻿namespace Clinica.UIForms.ViewModels
+﻿using Clinica.Common.Models;
+
+namespace Clinica.UIForms.ViewModels
 {
     public class MainViewModel
     {
         private static MainViewModel instance;
+
+        public TokenResponse Token { get; set; }
 
         public LoginViewModel Login { get; set; }
 
