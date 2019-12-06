@@ -55,6 +55,59 @@
                 await this.userHelper.AddUserToRoleAsync(user, "Admin");
             }
 
+            var user2 = await this.userHelper.GetUserByEmailAsync("doctor@gmail.com");
+            if (user2 == null)
+            {
+                user2 = new User
+                {
+                    FirstName = "Tania",
+                    LastName = "Lopez",
+                    Email = "doctor@gmail.com",
+                    UserName = "doctor@gmail.com"
+                };
+
+                var result = await this.userHelper.AddUserAsync(user2, "123456");
+                if (result != IdentityResult.Success)
+                {
+                    throw new InvalidOperationException("Could not create the user in seeder");
+                }
+
+                await this.userHelper.AddUserToRoleAsync(user2, "Admin");
+            }
+
+            var isInRole2 = await this.userHelper.IsUserInRoleAsync(user2, "Admin");
+            if (!isInRole2)
+            {
+                await this.userHelper.AddUserToRoleAsync(user2, "Admin");
+            }
+            
+            
+            var user3 = await this.userHelper.GetUserByEmailAsync("secre@gmail.com");
+            if (user3 == null)
+            {
+                user3 = new User
+                {
+                    FirstName = "Sandra",
+                    LastName = "Hernandez",
+                    Email = "secre@gmail.com",
+                    UserName = "secre@gmail.com"
+                };
+
+                var result = await this.userHelper.AddUserAsync(user3, "123456");
+                if (result != IdentityResult.Success)
+                {
+                    throw new InvalidOperationException("Could not create the user in seeder");
+                }
+
+                await this.userHelper.AddUserToRoleAsync(user3, "UserPro");
+            }
+
+            var isInRole3 = await this.userHelper.IsUserInRoleAsync(user3, "UserPro");
+            if (!isInRole3)
+            {
+                await this.userHelper.AddUserToRoleAsync(user3, "UserPro");
+            }
+            
 
 
             if (!this.context.Pacients.Any())

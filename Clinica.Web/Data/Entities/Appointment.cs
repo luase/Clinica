@@ -19,7 +19,7 @@
 
         public IEnumerable<AppointmentDetail> Items { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C}")]
+        [DisplayFormat(DataFormatString = "{0:N0}")]
         public int Lines { get { return this.Items == null ? 0 : this.Items.Count(); } }
 
 
@@ -36,8 +36,23 @@
         public decimal Value { get; set; }
 
 
+        //parte 35 4/4
+        /*
+        [Display(Name = "LocalDate")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
+        public DateTime? AppointmentDateLocal
+        {
+            get
+            {
+                if (this.Date == null)
+                {
+                    return null;
+                }
 
-
+                return this.Date.ToLocalTime();
+            }
+        }
+        */
 
     }
 

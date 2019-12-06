@@ -22,7 +22,7 @@
                 @Html.DisplayNameFor(model => model.Date)
             </th>
             <th>
-                # Lines
+                @Html.DisplayNameFor(model => model.Lines)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Value)
@@ -47,7 +47,7 @@
         @foreach (var item in Model)
         {
         <tr>
-            @if (this.User.IsInRole("Admin") || this.User.IsInRole("Admin"))
+            @if (this.User.IsInRole("Admin") || this.User.IsInRole("UserPro"))
             {
                 <th>
                     @Html.DisplayFor(modelItem => item.User.FullName)
@@ -57,7 +57,7 @@
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Items.Count())
+                @Html.DisplayFor(modelItem => item.Lines)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Value)
